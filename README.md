@@ -28,13 +28,30 @@ A bit about this module
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| aws.ap-northeast-1 | n/a |
+| aws.ap-northeast-2 | n/a |
+| aws.ap-south-1 | n/a |
+| aws.ap-southeast-1 | n/a |
+| aws.ap-southeast-2 | n/a |
+| aws.ca-central-1 | n/a |
+| aws.eu-central-1 | n/a |
+| aws.eu-north-1 | n/a |
+| aws.eu-west-1 | n/a |
+| aws.eu-west-2 | n/a |
+| aws.eu-west-3 | n/a |
+| aws.sa-east-1 | n/a |
+| aws.us-west-1 | n/a |
+| aws.us-west-2 | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| name | Moniker to apply to all resources in the module | `string` | n/a | yes |
+| cloudtrail\_log\_group | ARN of the CloudWatch log group for CloudTrail | `string` | n/a | yes |
+| notification\_topic\_arn | ARN of the SNS Topic to send notifications to | `string` | n/a | yes |
+| enabled\_regions | Regions to enable module in | `string` | <pre>[<br>  "us-east-1",<br>  "us-east-2",<br>  "us-west-1",<br>  "us-west-2",<br>  "ca-central-1",<br>  "eu-central-1",<br>  "eu-west-1",<br>  "eu-west-2",<br>  "eu-west-3",<br>  "eu-north-1",<br>  "ap-northeast-1",<br>  "ap-northeast-2",<br>  "ap-southeast-1",<br>  "ap-southeast-2",<br>  "ap-south-1",<br>  "sa-east-1"<br>]</pre> | no |
 | tags | User-Defined tags | `map(string)` | `{}` | no |
 
 ## Outputs
