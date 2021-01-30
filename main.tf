@@ -3,9 +3,9 @@ provider "aws" {
   region = "us-east-1"
 }
 
-module "cis-cloudwatch-monitors" {
+module "us_east_1" {
   source  = "rhythmictech/cis-cloudwatch-monitors/aws"
-  version = "~> 1.1"
+  version = "~> 1.1.0"
 
   count = contains(var.enabled_regions, "us-east-1") ? 1 : 0
 
@@ -13,8 +13,8 @@ module "cis-cloudwatch-monitors" {
   notification_arn = var.notification_topic_arn
   tags             = var.tags
 
-  provider {
-    aws = "aws.us-east-1"
+  providers = {
+    aws = aws.us-east-1
   }
 }
 
@@ -23,9 +23,9 @@ provider "aws" {
   region = "us-east-2"
 }
 
-module "cis-cloudwatch-monitors" {
+module "us_east_2" {
   source  = "rhythmictech/cis-cloudwatch-monitors/aws"
-  version = "~> 1.1"
+  version = "~> 1.1.0"
 
   count = contains(var.enabled_regions, "us-east-2") ? 1 : 0
 
@@ -33,19 +33,29 @@ module "cis-cloudwatch-monitors" {
   notification_arn = var.notification_topic_arn
   tags             = var.tags
 
-  provider {
-    aws = "aws.us-east-1"
+  providers = {
+    aws = aws.us-east-1
   }
 }
+
 provider "aws" {
   alias  = "us-west-1"
   region = "us-west-1"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_us_west_1" {
-  admin_account_id = var.guardduty_admin_account
+module "us_west_1" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.us-west-1
+  count = contains(var.enabled_regions, "us-west-1") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.us-west-1
+  }
 }
 
 provider "aws" {
@@ -53,10 +63,19 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_us_west_2" {
-  admin_account_id = var.guardduty_admin_account
+module "us_west_2" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.us-west-2
+  count = contains(var.enabled_regions, "us-west-2") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.us-west-2
+  }
 }
 
 provider "aws" {
@@ -64,10 +83,19 @@ provider "aws" {
   region = "ca-central-1"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_ca_central_1" {
-  admin_account_id = var.guardduty_admin_account
+module "ca_central_1" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.ca-central-1
+  count = contains(var.enabled_regions, "ca-central-1") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.ca-central-1
+  }
 }
 
 provider "aws" {
@@ -75,10 +103,19 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_eu_central_1" {
-  admin_account_id = var.guardduty_admin_account
+module "eu_central_1" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.eu-central-1
+  count = contains(var.enabled_regions, "eu-central-1") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.eu-central-1
+  }
 }
 
 provider "aws" {
@@ -86,10 +123,19 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_eu_west_1" {
-  admin_account_id = var.guardduty_admin_account
+module "eu_west_1" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.eu-west-1
+  count = contains(var.enabled_regions, "eu-west-1") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.eu-west-1
+  }
 }
 
 provider "aws" {
@@ -97,10 +143,19 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_eu_west_2" {
-  admin_account_id = var.guardduty_admin_account
+module "eu_west_2" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.eu-west-2
+  count = contains(var.enabled_regions, "eu-west-2") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.eu-west-2
+  }
 }
 
 provider "aws" {
@@ -108,10 +163,19 @@ provider "aws" {
   region = "eu-west-3"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_eu_west_3" {
-  admin_account_id = var.guardduty_admin_account
+module "eu_west_3" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.eu-west-3
+  count = contains(var.enabled_regions, "eu-west-3") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.eu-west-3
+  }
 }
 
 provider "aws" {
@@ -119,10 +183,19 @@ provider "aws" {
   region = "eu-north-1"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_eu_north_1" {
-  admin_account_id = var.guardduty_admin_account
+module "eu_north_1" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.eu-north-1
+  count = contains(var.enabled_regions, "eu-north-1") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.eu-north-1
+  }
 }
 
 provider "aws" {
@@ -130,10 +203,19 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_ap_northeast_1" {
-  admin_account_id = var.guardduty_admin_account
+module "ap_northeast_1" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.ap-northeast-1
+  count = contains(var.enabled_regions, "ap-northeast-1") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.ap-northeast-1
+  }
 }
 
 provider "aws" {
@@ -141,10 +223,19 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_ap_northeast_2" {
-  admin_account_id = var.guardduty_admin_account
+module "ap_northeast_2" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.ap-northeast-2
+  count = contains(var.enabled_regions, "ap-northeast-2") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.ap-northeast-2
+  }
 }
 
 provider "aws" {
@@ -152,10 +243,19 @@ provider "aws" {
   region = "ap-southeast-1"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_ap_southeast_1" {
-  admin_account_id = var.guardduty_admin_account
+module "ap_southeast_1" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.ap-southeast-1
+  count = contains(var.enabled_regions, "ap-southeast-1") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.ap-southeast-1
+  }
 }
 
 provider "aws" {
@@ -163,10 +263,19 @@ provider "aws" {
   region = "ap-southeast-2"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_ap_southeast_2" {
-  admin_account_id = var.guardduty_admin_account
+module "ap_southeast_2" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.ap-southeast-2
+  count = contains(var.enabled_regions, "ap-southeast-2") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.ap-southeast-2
+  }
 }
 
 provider "aws" {
@@ -174,10 +283,19 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_ap_south_1" {
-  admin_account_id = var.guardduty_admin_account
+module "ap_south_1" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.ap-south-1
+  count = contains(var.enabled_regions, "ap-south-1") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.ap-south-1
+  }
 }
 
 provider "aws" {
@@ -185,8 +303,17 @@ provider "aws" {
   region = "sa-east-1"
 }
 
-resource "aws_guardduty_organization_admin_account" "guardduty_sa_east_1" {
-  admin_account_id = var.guardduty_admin_account
+module "sa_east_1" {
+  source  = "rhythmictech/cis-cloudwatch-monitors/aws"
+  version = "~> 1.1.0"
 
-  provider = aws.sa-east-1
+  count = contains(var.enabled_regions, "sa-east-1") ? 1 : 0
+
+  log_group        = var.cloudtrail_log_group
+  notification_arn = var.notification_topic_arn
+  tags             = var.tags
+
+  providers = {
+    aws = aws.sa-east-1
+  }
 }
